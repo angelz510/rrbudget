@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { createBudget, createExpense, fetchData } from "../helpers";
 import Intro from "../components/Intro";
 import AddBudgetForm from "../components/AddBudgetForm";
@@ -88,6 +88,11 @@ const Dashboard = () => {
                         .sort((a, b) => b.createdAt - a.createdAt)
                         .slice(0, 8)}
                     />
+                    {expenses.length > 8 && (
+                      <Link to="expenses" className="btn btn--dark">
+                        View all expenses
+                      </Link>
+                    )}
                   </div>
                 )}
               </div>
