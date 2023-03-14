@@ -1,10 +1,12 @@
+import { BanknotesIcon } from "@heroicons/react/24/outline";
+import { Form, Link } from "react-router-dom";
 import {
   calculateSpentByBudget,
   formatCurrency,
   formatPercentage,
 } from "../helpers";
 
-const BudgetItem = ({ budget }) => {
+const BudgetItem = ({ budget, showDelete = false }) => {
   const { id, name, amount, color } = budget;
   const spent = calculateSpentByBudget(id);
 
@@ -21,6 +23,18 @@ const BudgetItem = ({ budget }) => {
         <small>{formatCurrency(spent)} spent</small>
         <small>{formatCurrency(amount - spent)} remaining</small>
       </div>
+      {showDelete ? (
+        <Form>
+          <p>hi</p>
+        </Form>
+      ) : (
+        <div className="flex-sm">
+          <Link to={`/budget/${id}`} className="btn">
+            <span>View Details</span>
+            <BanknotesIcon width={20} />
+          </Link>
+        </div>
+      )}
     </div>
   );
 };
