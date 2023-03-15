@@ -1,4 +1,4 @@
-import { BanknotesIcon } from "@heroicons/react/24/outline";
+import { BanknotesIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { Form, Link } from "react-router-dom";
 import {
   calculateSpentByBudget,
@@ -24,9 +24,22 @@ const BudgetItem = ({ budget, showDelete = false }) => {
         <small>{formatCurrency(amount - spent)} remaining</small>
       </div>
       {showDelete ? (
-        <Form>
-          <p>hi</p>
-        </Form>
+        <div className="flex-sm">
+          <Form
+            method="post"
+            action="delete"
+            onSubmit={(e) => {
+              if (!confirm("Are you sure you want to delete this budget?")) {
+                e.preventDefault();
+              }
+            }}
+          >
+            <button type="submit" className="btn">
+              <span>Delete Budget</span>
+              <TrashIcon width={20} />
+            </button>
+          </Form>
+        </div>
       ) : (
         <div className="flex-sm">
           <Link to={`/budget/${id}`} className="btn">
